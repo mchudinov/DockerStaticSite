@@ -10,7 +10,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'chudinov/nginx-hello:$(build.buildId)'
+  imageName: 'chudinov/nginx-hello:latest'
 
 steps:
 - script: docker build -f Dockerfile -t $(imageName) .
