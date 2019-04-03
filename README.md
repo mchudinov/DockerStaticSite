@@ -2,11 +2,17 @@
 
 This repo contains code for building a simple static website served using an Nginx container inside Docker. The code for the site is contained in `index.html`, and the Nginx config is in `default.conf`. The Dockerfile contains commands to build a Docker Image.
 
-To build a Docker image from the Dockerfile, run the following command from inside this directory
+To build a Docker image from the Dockerfile, run the **docker build** command from inside this directory
 
 ```sh
 $ docker build -t <docker-hub-username>/staticsite:1.0 .
 ```
+
+Example:
+```sh
+$ docker build -t chudinov/nginx-hello:latest .
+```
+
 This will produce the following output
 
 ```sh
@@ -22,7 +28,7 @@ Removing intermediate container cb64bb3e3aca
 Successfully built 3407953dafd0
 ```
 
-To run the image in a Docker container, use the following command
+To run the image in a Docker container, use the **docker run** command
 ```sh
 $ docker run -itd --name mycontainer --publish 8080:80 <docker-hub-username>/staticsite:1.0
 ```
