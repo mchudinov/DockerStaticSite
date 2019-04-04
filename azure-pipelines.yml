@@ -7,6 +7,7 @@ pool:
 variables:
   dockerId: 'chudinov'
   imageName: 'nginx-hello'
+  pswd: $(dockerPassword)
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
