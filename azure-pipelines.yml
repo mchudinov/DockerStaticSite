@@ -13,9 +13,9 @@ steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
   displayName: 'Docker build'
 - script: |
-    echo XXX--->>
+    echo XXX---
     echo $(dockerPassword)
-    echo YYY--->>
+    echo YYY---
     docker login --username $(dockerId) --password $(pswd)
     docker push $(dockerId)/$(imageName)
   displayName: 'Docker push'
