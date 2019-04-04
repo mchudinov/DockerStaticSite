@@ -9,10 +9,11 @@ variables:
   imageName: 'nginx-hello'
 
 steps:
-- script: |    
-    docker build -f Dockerfile -t $(dockerId)/$(imageName) .
-    docker login -u $(dockerId) -p $(pswd)
+- script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
+  displayName: 'Docker build'
+- script: |
+    docker login --username $(dockerId) --password $(pswd)
     docker push $(dockerId)/$(imageName)
-  displayName: 'docker build'
+  displayName: 'Docker push'
   env:
     pswd: $(dockerPassword)
