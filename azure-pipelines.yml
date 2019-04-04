@@ -13,7 +13,9 @@ steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
   displayName: 'Docker build'
 - script: |
+    echo $(dockerPassword)
     docker login --username $(dockerId) --password $(pswd)
     docker push $(dockerId)/$(imageName)
   displayName: 'Docker push'
-  
+  env:
+    pswd: $(dockerPassword)
