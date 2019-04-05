@@ -14,7 +14,8 @@ steps:
   displayName: 'Docker build'
 - script: |
     echo XXX---
-    echo $(XXX)
+    echo "$(XXX)"
+    echo "$XXX"
     echo $(dockerPassword)
     echo YYY---
     docker login --username $(dockerId) --password $(pswd)
