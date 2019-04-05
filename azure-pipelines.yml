@@ -8,7 +8,7 @@ variables:
   dockerId: 'chudinov'
   imageName: 'nginx-hello'
   pswd: 'Merlons11'
-  XXX: $(XXX)
+  XXX1: $(XXX)
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
@@ -21,6 +21,7 @@ steps:
     echo '${XXX}'
     echo $XXX
     echo $XXX1
+    echo $XXX2
     echo $(dockerPassword)
     echo $pswd
     echo YYY---
@@ -29,4 +30,4 @@ steps:
   displayName: 'Docker push'
   env:
     pswd: $(dockerPassword)
-    XXX1: $(XXX)
+    XXX2: $(XXX)
