@@ -22,6 +22,7 @@ steps:
     echo $XXX
     echo $XXX1
     echo $(dockerPassword)
+    echo $pswd
     echo YYY---
     docker login --username $(dockerId) --password $(pswd)
     docker push $(dockerId)/$(imageName)
