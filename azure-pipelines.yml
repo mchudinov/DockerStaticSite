@@ -7,27 +7,24 @@ pool:
 variables:
   dockerId: 'chudinov'
   imageName: 'nginx-hello'
-  pswd: 'Merlons11'
+  pswd1: 'Merlons11'
   XXX1: $(XXX)
+  pswd3: $(dockerPassword)
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
   displayName: 'Docker build'
 - script: |
     echo XXX---
-    echo "$(XXX)"
-    echo "$XXX"
-    echo "${XXX}"
-    echo '${XXX}'
-    echo $XXX
-    echo $XXX1
-    echo $XXX2
-    echo $(dockerPassword)
-    echo $pswd
+    echo "$(pswd3)"
+    echo "$pswd3"
+    echo "${pswd3}"
+    echo '${pswd3}'
+    echo $pswd3
     echo YYY---
     docker login --username $(dockerId) --password $(pswd)
     docker push $(dockerId)/$(imageName)
   displayName: 'Docker push'
   env:
-    pswd: $(dockerPassword)
+    pswd2: $(dockerPassword)
     XXX2: $(XXX)
