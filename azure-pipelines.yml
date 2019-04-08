@@ -16,15 +16,20 @@ steps:
   displayName: 'Docker build'
 - script: |
     echo XXX---
-    echo "$(pswd3)"
-    echo "$pswd3"
-    echo "${pswd3}"
-    echo '${pswd3}'
-    echo $pswd3
+    echo "$(XXX1)"
+    echo "$XXX1"
+    echo "${XXX1}"
+    echo '${XXX1}'
+    echo $XXX1
+    echo "$(XXX2)"
+    echo "$XXX2"
+    echo "${XXX2}"
+    echo '${XXX2}'
+    echo $XXX2    
     echo YYY---
-    docker login --username $(dockerId) --password $(pswd)
-    docker push $(dockerId)/$(imageName)
+    #docker login --username $(dockerId) --password $(pswd)
+    #docker push $(dockerId)/$(imageName)
   displayName: 'Docker push'
   env:
     pswd2: $(dockerPassword)
-    XXX2: $(XXX)
+    XXX2: $(XXX1)
