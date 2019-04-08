@@ -10,12 +10,12 @@ variables:
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
-  displayName: 'Docker build'
-  
+  displayName: 'docker build'
+
 - script: |
-    docker login --username $(dockerId) --password $(pswd)
+    docker login --username $(dockerId) --password $pswd
     docker push $(dockerId)/$(imageName)
-  displayName: 'Docker push'
+  displayName: 'docker push'
   env:
     pswd: $(dockerPassword)
     
