@@ -10,7 +10,7 @@ variables:
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
-  displayName: 'docker build'
+  displayName: 'Docker build'
 
 - script: |
     docker login --username $(dockerId) --password $pswd
