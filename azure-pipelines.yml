@@ -7,26 +7,15 @@ pool:
 variables:
   dockerId: 'chudinov'
   imageName: 'nginx-hello'
-  pswd1: 'Merlons11'
-  XXX1: $(XXX)
-  pswd3: $(dockerPassword)
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
-  displayName: 'Docker build XAXAXA'
+  displayName: 'Docker build'
+  
 - script: |
-    echo XXX---
-    echo $(myvar)
-    echo $(myvar1)
-    echo $pswd2
-    echo YYY---
-    #docker login --username $(dockerId) --password $(pswd)
-    #docker push $(dockerId)/$(imageName)
+    docker login --username $(dockerId) --password $(pswd)
+    docker push $(dockerId)/$(imageName)
   displayName: 'Docker push'
   env:
-    pswd2: $(dockerPassword)
-    XXX2: $(XXX1)
-    XXX3: $(XXX)
-- bash: echo This is a script that could use $SYSTEM_ACCESSTOKEN
-  env:
-    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+    pswd: $(dockerPassword)
+    
