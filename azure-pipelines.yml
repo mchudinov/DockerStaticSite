@@ -15,7 +15,7 @@ steps:
 - script: |
     docker login --username $(dockerId) --password $pswd
     docker push $(dockerId)/$(imageName)
-  displayName: 'docker push'
+  displayName: 'Docker push'
   env:
     pswd: $(dockerPassword)
     
