@@ -26,6 +26,11 @@ steps:
     echo "${XXX2}"
     echo '${XXX2}'
     echo $XXX2    
+    echo "$(XXX3)"
+    echo "$XXX3"
+    echo "${XXX3}"
+    echo '${XXX3}'
+    echo $XXX3      
     echo YYY---
     #docker login --username $(dockerId) --password $(pswd)
     #docker push $(dockerId)/$(imageName)
@@ -33,3 +38,4 @@ steps:
   env:
     pswd2: $(dockerPassword)
     XXX2: $(XXX1)
+    XXX3: $(XXX)
