@@ -16,7 +16,9 @@ steps:
   displayName: 'Docker build XAXAXA'
 - script: |
     echo XXX---
-    echo $(myvar)    
+    echo $(myvar)
+    echo $(myvar1)
+    echo $pswd2
     echo YYY---
     #docker login --username $(dockerId) --password $(pswd)
     #docker push $(dockerId)/$(imageName)
