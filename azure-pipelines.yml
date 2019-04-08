@@ -13,24 +13,10 @@ variables:
 
 steps:
 - script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
-  displayName: 'Docker build'
+  displayName: 'Docker build XAXAXA'
 - script: |
     echo XXX---
-    echo "$(XXX1)"
-    echo "$XXX1"
-    echo "${XXX1}"
-    echo '${XXX1}'
-    echo $XXX1
-    echo "$(XXX2)"
-    echo "$XXX2"
-    echo "${XXX2}"
-    echo '${XXX2}'
-    echo $XXX2    
-    echo "$(XXX3)"
-    echo "$XXX3"
-    echo "${XXX3}"
-    echo '${XXX3}'
-    echo $XXX3      
+    echo $(myvar)    
     echo YYY---
     #docker login --username $(dockerId) --password $(pswd)
     #docker push $(dockerId)/$(imageName)
@@ -39,3 +25,6 @@ steps:
     pswd2: $(dockerPassword)
     XXX2: $(XXX1)
     XXX3: $(XXX)
+- bash: echo This is a script that could use $SYSTEM_ACCESSTOKEN
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
