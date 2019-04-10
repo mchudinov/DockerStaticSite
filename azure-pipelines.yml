@@ -9,7 +9,7 @@ variables:
   imageName: 'nginx-hello'
 
 steps:
-- script: docker build -f Dockerfile -t $(dockerId)/$(imageName) .
+- script: docker build --file Dockerfile --tag $(dockerId)/$(imageName) .
   displayName: 'Docker build'
 
 - script: |
