@@ -5,7 +5,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  dockerId: 'chudinov'
+  dockerId: $(dockerId)
   imageName: 'nginx-hello'
 
 steps:
