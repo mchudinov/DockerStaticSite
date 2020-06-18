@@ -2,6 +2,7 @@
 
 This repo contains code for building a simple static website served using an Nginx container inside Docker. The code for the site is contained in `index.html`, and the Nginx config is in `default.conf`. The Dockerfile contains commands to build a Docker Image.
 
+## Build
 To build a Docker image from the Dockerfile, run the **docker build** command from inside this directory
 
 ```sh
@@ -27,10 +28,16 @@ Step 3/3 : COPY index.html /usr/share/nginx/html/index.html
 Removing intermediate container cb64bb3e3aca
 Successfully built 3407953dafd0
 ```
-
-To run the image in a Docker container, use the **docker run** command
+## Run
+To run the image in a Docker container, use the **docker run** command. Port **80** is the port in Docker. Port **8080** is the local port.
 ```sh
-$ docker run -itd --name mycontainer --publish 8080:80 <docker-hub-username>/nginx-hello:1.0
+$ docker run -itd --name mycontainer --publish 8080:80 <docker-hub-username>/nginx-hello:<version>
 ```
 
-This will start serving the static site on port 8080. If you visit `http://localhost:8080` in your browser, you should be able to see our static site!
+This will start serving the static site on port 8080. If you visit `http://localhost:8080` in your browser, you should be able to see our static site.
+
+## Push
+To push the image to a registry, use the **docker push** command.
+```sh
+$ docker push <docker-hub-username>/nginx-hello:<version>
+```
