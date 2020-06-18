@@ -1,0 +1,21 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  dockerId: 'chudinov'
+  imageName: 'nginx-hello'
+
+steps:
+- script: docker build --tag $(dockerId)/$(imageName) .
+  displayName: 'Docker build'
+
+- script: |
+    docker login --username $(dockerId) --password $pswd
+    docker push $(dockerId)/$(imageName)
+  displayName: 'Docker push'
+  env:
+    pswd: $(dockerPassword)
+    
