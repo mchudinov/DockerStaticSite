@@ -1,7 +1,14 @@
 # A static site using Nginx and Docker (and Kubernetes)
 
-Docker Hub repo https://hub.docker.com/repository/docker/chudinov/nginx-hello
-This repo contains code for building a simple static website served using an Nginx container inside Docker. The code for the site is contained in `index.html`, and the Nginx config is in `default.conf`. The Dockerfile contains commands to build a Docker Image.
+Docker Hub [repo](https://hub.docker.com/repository/docker/chudinov/nginx-hello)
+This repo contains code for building a simple static website served using an Nginx container inside Docker. 
+
+The code for the site is contained in `index.html`, and the Nginx config is in `default.conf`. 
+
+Other files:
+- Dockerfile contains commands to build a Docker Image
+- kubernetes.yaml contains definitions for running the image in Kubernetes
+- nginx-hello/*.yaml files are for Helm
 
 ## Docker
 Prerequsite: **docker** is installed.
@@ -34,6 +41,7 @@ Removing intermediate container cb64bb3e3aca
 Successfully built 3407953dafd0
 Successfully tagged nginx-hello:latest
 ```
+
 ### Run
 To run the image in a Docker container, use the **docker run** command:
 ```sh
@@ -47,8 +55,10 @@ $ docker run -itd --name mycontainer --publish 8080:80 nginx-hello
 ```
 This will start serving the static site on port 8080. If you visit `http://localhost:8080` in your browser, you should be able to see our static site.
 
+
 ### Tag
-To differ between versions of the same image we **tag** it with the **docker tag** command:
+Tagging is needed in order to differ between versions of the same image.
+The **docker tag** command:
 ```sh
 $ docker tag nginx-hello <docker-hub-username>/nginx-hello:<version>
 ```
@@ -58,6 +68,7 @@ $ docker tag nginx-hello chudinov/nginx-hello:1.0
 ```
 
 ### Push
+In order to share the image with others, either people or services, we publish it in a registry.
 To push the image to a registry, use the **docker push** command:
 ```sh
 $ docker push <registryname>/nginx-hello:<version>
@@ -80,7 +91,7 @@ $ kubectl get service
 Pure Kubernetes without Helm.
 Prerequsite: **kubectl** command is installed.
 
-### Edit containers.image in kubernetes.yaml
+#### Edit containers.image in kubernetes.yaml
 In **kubernetes.yaml** file edit containers.image for your image name and tag.
 ```yaml
       containers:
@@ -94,18 +105,37 @@ To deploy your application, use the kubectl apply command:
 $ kubectl apply -f kubernetes.yaml
 ```
 
+#### Clean up
+Remove application from cluster:
+```sh
+$ kubectl delete deployments/nginx-hello services/nginx-hello
+```
+
 ### Kubernetes with Helm
 
-Prerequsite: **kubectl** and **helm** are installed. 
+Prerequsite: both **kubectl** and **helm** are installed. Helm is [initialized with a repository](https://helm.sh/docs/intro/quickstart/#initialize-a-helm-chart-repository).
 
 #### Change image.repository in values.yaml
 
 In **nginx-hello/values.yaml** file change ```image.repository``` to your registry ```<registryname>/nginx-hello```
 
+```yaml
+image:
+  repository: chudinov/nginx-hello
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+```
+
 #### Deploy application
 Run helm chart:
 ```sh
 $ helm install nginx-hello nginx-hello/
+```
+
+#### Clean up with Helm
+```sh
+$ helm delete nginx-hello
 ```
 
 ### Check the deployment
@@ -122,9 +152,3 @@ kubernetes         ClusterIP      10.0.0.1       <none>           443/TCP       
 nginx-hello        LoadBalancer   10.0.214.177   40.127.239.62    80:30699/TCP   9m
 ```
 Navigate your browser to the EXTERNAL-IP of nginx-hello to test the service. Use **http** protocol.
-
-### Clean up
-Remove application from cluster:
-```sh
-$ kubectl delete deployments/nginx-hello services/nginx-hello
-```
