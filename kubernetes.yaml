@@ -17,8 +17,8 @@ spec:
       labels:
         app: nginx-hello
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
+      # nodeSelector:
+      #   "beta.kubernetes.io/os": linux
       containers:
       - name: nginx-hello
         image: chudinov/nginx-hello:latest
