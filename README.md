@@ -117,7 +117,7 @@ Prerequsite: both **kubectl** and **helm** are installed. Helm is [initialized w
 
 #### Change image.repository in values.yaml
 
-In **nginx-hello/values.yaml** file change ```image.repository``` to your registry ```<registryname>/nginx-hello```
+In **helm/nginx-hello/values.yaml** file change ```image.repository``` to your registry ```<registryname>/nginx-hello```
 
 ```yaml
 image:
@@ -127,10 +127,17 @@ image:
   tag: ""
 ```
 
+#### Build helm chart
+Run helm chart:
+```sh
+$ cd helm/nginx-hello
+$ helm package .
+```
+
 #### Deploy application
 Run helm chart:
 ```sh
-$ helm install nginx-hello nginx-hello/
+$ helm install nginx-hello nginx-hello-0.1.0.tgz
 ```
 
 #### Clean up with Helm
